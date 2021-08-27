@@ -90,3 +90,70 @@ class LinearRegression(object):
         plt.scatter(x[:, dim], y, s=3, c="y")
         plt.plot(x[:, dim], self.predict(x))
         plt.show()
+
+
+
+class Perceptron(object):
+    def __init__(self, batch_size=1, lr=1e-3, num_epoch=100, fit_bias=True):
+        super(Perceptron, self).__init__()
+        self.fit_bias = fit_bias
+        self.w = None
+        self.batch_size = batch_size
+        self.lr = lr
+        self.num_epoch = num_epoch
+
+    def _init_params(self, num_features):
+        self.w = np.random.normal(size=(num_features, 1))
+
+    def loader(self, X, Y):
+        base = np.c_[X, Y]
+        np.random.shuffle(base)
+        X, Y = base[:, :-1], base[:, -1]
+        data, label = [], []
+        for x, y in zip(X, Y):
+            data.append(x)
+            label.append(y)
+            if len(data) == self.batch_size:
+                data, label = np.asarray(data), np.asarray(label)
+                label = np.expand_dims(label, axis=-1) if len(label.shape) == 1 else label
+                yield data, label
+                data = []
+                label = []
+
+    def _fit_with_sgd(self, X, Y):
+        x_y = np.c_[X, Y]
+        for epoch in range(self.num_epoch):
+            np.random.shuffle(x_y)
+            error_num = 0
+            for index in range(len(x_y)):
+                x, y = x_y[index, :-1], x_y[index, -1]
+                if y * self.w.T.dot(x) < 0:
+                    dw = -x.dot(y).reshape((-1, 1))
+                    self.w -= self.lr * dw
+
+    def fit(self, X, Y):
+        if self.fit_bias:
+            X = np.c_[X, np.ones_like(Y)]
+        self._init_params(X.shape[1])
+        self._fit_with_sgd(X, Y)
+
+    def get_params(self):
+        if self.fit_bias:
+            w = self.w[:-1]
+            b = self.w[-1]
+        else:
+            w = self.w
+            b = 0
+        return w, b
+
+    def predict(self, X):
+        # if self.fit_bias:
+        #     X = np.c_[X, np.ones(X.shape[0])]
+        v = - X * self.w[0] / self.w[1] - self.w[2] / self.w[1]
+        return v
+
+    def draw(self, X):
+        plt.scatter(X[:X.shape[0] // 2, 0], X[:X.shape[0] // 2, 1], c="y", s=5)
+        plt.scatter(X[X.shape[0] // 2:, 0], X[X.shape[0] // 2:, 1], c="k", s=5)
+        plt.plot(X[:X.shape[0] // 2, 0], self.predict(X[:X.shape[0] // 2, 0]))
+        plt.show()
