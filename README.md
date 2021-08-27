@@ -1,8 +1,14 @@
 # Machine-Learning-notes
 
-## file structure
+## Folder Structure
 ```
 -|models
+--|linear_models
+---|linear_regression
+---|perceptron
+
 -|notebooks
+--|linear-regression
+--|perceptron
 -README.md
 ```
