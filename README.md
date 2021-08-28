@@ -1,6 +1,6 @@
 ## Machine-Learning-notes
 
-### Folder Structure
+### Repo Structure
 ```
 -|models
 --|linear_models
