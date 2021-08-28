@@ -1,15 +1,19 @@
-# Machine-Learning-notes
+## Machine-Learning-notes
 
-## Folder Structure
+### Folder Structure
 ```
 -|models
 --|linear_models
 ---|linear_regression
 ---|perceptron
 
--|notebooks
+-|en-notebooks:English version
 --|linear-regression
 --|perceptron
+
+-|cn-notebooks:中文版
+--|线性回归
+--|感知机
 
 -README.md
 ```
