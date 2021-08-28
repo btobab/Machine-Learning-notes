@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class LinearRegression(object):
     def __init__(self, batch_size=1, epoch_num=10, lr=1e-2, l1_ratio=None, l2_ratio=None,
-                 fit_bias=True, opt="sgd", if_standard=False):
+                 fit_bias=True, opt="sgd"):
         self.batch_size = batch_size
         self.epoch_num = epoch_num
         self.lr = lr
@@ -12,7 +12,6 @@ class LinearRegression(object):
         self.l2_ratio = l2_ratio
         self.fit_bias = fit_bias
         self.opt = opt
-        self.if_standard = if_standard
         self.w = None
 
     def _fit_closed(self, x, y):
@@ -50,13 +49,6 @@ class LinearRegression(object):
     def fit(self, x, y):
         if len(y.shape) == 1:
             y = np.expand_dims(y, axis=-1)
-        if self.if_standard:
-            self.feature_mean = np.mean(x, axis=0)
-            self.feature_std = np.std(x, axis=0)
-            x = (x - self.feature_mean) / self.feature_std
-            self.label_mean = np.mean(y, axis=0)
-            self.label_std = np.std(y, axis=0)
-            y = (y - np.mean(y, axis=0)) / np.std(y, axis=0)
         if self.fit_bias:
             x = np.c_[x, np.ones_like(y)]
         self.init_params(x.shape[1])
@@ -72,9 +64,6 @@ class LinearRegression(object):
         else:
             w = self.w.tolist()
             b = 0
-
-        # if self.if_standard:
-        #     w = w * self.label_std / self.feature_std
 
         return w, b
 
