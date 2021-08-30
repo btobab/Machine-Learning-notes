@@ -4,8 +4,9 @@
 ```
 -|models
 --|linear_models
----|linear_regression
----|perceptron
+---|Linear_regression
+---|Perceptron
+---|Logistic_regression
 
 -|en-notebooks:English version
 --|linear-regression
@@ -16,6 +17,7 @@
 --|线性回归
 --|感知机
 --|线性判别分析
+--|逻辑回归
 
 -README.md
 ```
