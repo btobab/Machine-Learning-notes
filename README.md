@@ -12,7 +12,7 @@
 -|en-notebooks:English version
 --|linear-regression
 --|perceptron
---|fisher
+--|lda
 --|logistic-regression
 
 -|cn-notebooks:中文版
@@ -23,3 +23,7 @@
 
 -README.md
 ```
+
+### Reference
+> [repo](https://github.com/zhulei227/ML_Notes)
+> [videos in bilibili.com](https://www.bilibili.com/video/BV1aE411o7qd)
