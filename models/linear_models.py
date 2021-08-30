@@ -146,3 +146,60 @@ class Perceptron(object):
         plt.scatter(X[X.shape[0] // 2:, 0], X[X.shape[0] // 2:, 1], c="k", s=5)
         plt.plot(X[:X.shape[0] // 2, 0], self.predict(X[:X.shape[0] // 2, 0]))
         plt.show()
+
+
+
+class Logistic_regression(object):
+    def __init__(self, batch_size, num_epoch, lr=1e-3, fit_bias=True):
+        super(Logistic_regression, self).__init__()
+        self.batch_size = batch_size
+        self.num_epoch = num_epoch
+        self.lr = lr
+        self.fit_bias = fit_bias
+        self.w = None
+
+    def init_params(self, num_features):
+        self.w = np.random.normal(size=[num_features, 1])
+
+    def loader(self, X, Y):
+        data = np.c_[X, Y]
+        np.random.shuffle(data)
+        n = len(data)
+        for i in range(n // self.batch_size + 1):
+            it = data[i * self.batch_size:min((i + 1) * self.batch_size, n), :]
+            batch_x, batch_y = it[:, :-1], it[:, -1].reshape((-1, 1))
+            yield batch_x, batch_y
+
+    def sigmoid(self, v):
+        return 1 / (1 + np.exp(-v))
+
+    def _fit_with_gd(self, X, Y):
+        for _ in range(self.num_epoch):
+            for x, y in self.loader(X, Y):
+                try:
+                    self.w -= -x.T.dot(y - self.sigmoid(x.dot(self.w))) * self.lr
+                    # print(self.w)
+                except:
+                    print("w:" + str(self.w.shape) + " x:" + str(x.shape) + " y:" + str(y.shape))
+                    return
+
+    def fit(self, X, Y):
+        if len(Y.shape) == 1:
+            Y = np.expand_dims(Y, axis=-1)
+        if self.fit_bias:
+            X = np.c_[X, np.ones_like(Y)]
+
+        self.init_params(X.shape[-1])
+        self._fit_with_gd(X, Y)
+
+    def get_params(self):
+        w = self.w
+        return w
+
+    def predict(self, X, Y):
+        if self.fit_bias:
+            X = np.c_[X, np.ones_like(Y)]
+        y_prob = self.sigmoid(X.dot(self.w))
+        y_hat = np.asarray([1 if p >= 0.5 else 0 for p in y_prob])
+        acc = np.sum(y_hat == Y) / len(Y)
+        return acc        
