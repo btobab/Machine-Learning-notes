@@ -149,6 +149,30 @@ class Perceptron(object):
 
 
 
+class LDA(object):
+    def __init__(self):
+        self.w = None
+
+    def fit(self, X1, X2):
+        mean_c1 = np.mean(X1, axis=0).reshape((-1, 1))
+        mean_c2 = np.mean(X2, axis=0).reshape((-1, 1))
+        sub1 = mean_c1 - X1.T
+        s_c1 = sub1.dot(sub1.T) / len(X1)
+        sub2 = mean_c2 - X2.T
+        s_c2 = sub2.dot(sub2.T) / len(X2)
+        self.w = np.linalg.pinv(s_c1 + s_c2).dot(mean_c1 - mean_c2)
+
+    def predict(self, data):
+        return data.dot(self.w)
+
+    def draw(self, data, label):
+        assert len(data.shape) <= 2, "the dimension of data is too large to draw"
+        assert len(label.shape) <= 1, "the shape of label should be consistent with axis x"
+        new_data = self.predict(data)
+        plt.scatter(new_data[:], data[:, 1], c=label, s=5)
+        plt.show()
+
+
 class Logistic_regression(object):
     def __init__(self, batch_size, num_epoch, lr=1e-3, fit_bias=True):
         super(Logistic_regression, self).__init__()

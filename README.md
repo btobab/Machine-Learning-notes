@@ -6,6 +6,7 @@
 --|linear_models
 ---|Linear_regression
 ---|Perceptron
+---|LDA
 ---|Logistic_regression
 
 -|en-notebooks:English version
