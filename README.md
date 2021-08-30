@@ -13,6 +13,7 @@
 --|linear-regression
 --|perceptron
 --|fisher
+--|logistic-regression
 
 -|cn-notebooks:中文版
 --|线性回归
