@@ -8,18 +8,21 @@
 ---|Perceptron
 ---|LDA
 ---|Logistic_regression
+---|GDA
 
 -|en-notebooks:English version
 --|linear-regression
 --|perceptron
 --|lda
 --|logistic-regression
+--|gda
 
 -|cn-notebooks:中文版
 --|线性回归
 --|感知机
 --|线性判别分析
 --|逻辑回归
+--|高斯判别分析
 
 -README.md
 ```

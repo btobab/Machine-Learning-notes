@@ -227,3 +227,57 @@ class Logistic_regression(object):
         y_hat = np.asarray([1 if p >= 0.5 else 0 for p in y_prob])
         acc = np.sum(y_hat == Y) / len(Y)
         return acc        
+
+
+class GDA(object):
+    def __init__(self):
+        self.phi = None
+        self.mu_1 = None
+        self.mu_2 = None
+        self.sigma = None
+
+    def fit(self, x, y):
+        # x = (x - np.mean(x, axis=0)) / np.var(x, axis=0)
+        # print(x.shape)
+        self.phi = np.mean(y)
+        n = len(y)
+        n1 = n * self.phi
+        n2 = n - n1
+
+        self.mu_1 = (x.T.dot(y) / n1).reshape((-1, 1))
+        self.mu_2 = (x.T.dot((1 - y)) / n2).reshape((-1, 1))
+        s1 = np.zeros((x.shape[-1], x.shape[-1]))
+        s2 = np.zeros((x.shape[-1], x.shape[-1]))
+
+        for i in range(n):
+            if y[i] == 1:
+                s1 += (x[i] - self.mu_1).dot((x[i] - self.mu_1).T)
+            else:
+                s2 += (x[i] - self.mu_2).dot((x[i] - self.mu_2).T)
+        s1 /= n1
+        s2 /= n2
+        self.sigma = (n1 * s1 + n2 * s2) / n
+
+    def get_params(self):
+        return self.phi, self.mu_1, self.mu_2, self.sigma
+
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
+
+    def evaluate(self, x, cla):
+        prob_1 = []
+        prob_2 = []
+        for x_i in x:
+            x_i = x_i.reshape((-1, 1))
+            p1 = 1 / (np.linalg.det(self.sigma) ** 0.5) \
+                 * np.exp(-0.5 * (x_i - self.mu_1).T.dot(np.linalg.inv(self.sigma)).dot((x_i - self.mu_1))) * self.phi
+            p2 = 1 / (np.linalg.det(self.sigma) ** 0.5) \
+                 * np.exp(-0.5 * (x_i - self.mu_2).T.dot(np.linalg.inv(self.sigma)).dot((x_i - self.mu_2))) * (
+                             1 - self.phi)
+            p1 = self.sigmoid(p1)
+            p2 = self.sigmoid(p2)
+            prob_1.append(p1)
+            prob_2.append(p2)
+        label = np.cast["int32"](prob_1 >= prob_2)
+        acc = np.sum(label == cla)
+        return acc
