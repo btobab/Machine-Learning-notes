@@ -9,6 +9,7 @@
 ---|LDA
 ---|Logistic_regression
 ---|GDA
+---|Naive_Bayes_classifier
 
 -|en-notebooks:English version
 --|linear-regression
@@ -16,6 +17,7 @@
 --|lda
 --|logistic-regression
 --|gda
+--|Naive_Bayes_classify
 
 -|cn-notebooks:中文版
 --|线性回归
@@ -23,6 +25,7 @@
 --|线性判别分析
 --|逻辑回归
 --|高斯判别分析
+--|朴素贝叶斯
 
 -README.md
 ```

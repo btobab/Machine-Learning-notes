@@ -281,3 +281,54 @@ class GDA(object):
         label = np.cast["int32"](prob_1 >= prob_2)
         acc = np.sum(label == cla)
         return acc
+
+
+class NaiveBayesClassifier(object):
+    def __init__(self):
+        self.positive_sigmas = []
+        self.positive_mus = []
+        self.negative_sigmas = []
+        self.negative_mus = []
+        self.phi = None
+
+    def fit(self, X, Y):
+        for j in range(X.shape[-1]):
+            index = (Y == 1)
+            sigma = np.var(X[index, j])
+            mu = np.mean(X[index, j])
+            self.positive_sigmas.append(sigma)
+            self.positive_mus.append(mu)
+
+        for j in range(X.shape[-1]):
+            index = (Y == 0)
+            sigma = np.var(X[index, j])
+            mu = np.mean(X[index, j])
+            self.negative_sigmas.append(sigma)
+            self.negative_mus.append(mu)
+
+        self.phi = np.mean(Y)
+
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
+
+    def predict(self, x, y):
+        posi_pred = np.ones(x.shape[0])
+        nega_pred = np.ones(x.shape[0])
+
+        for j in range(x.shape[1]):
+            prob = 1 / np.sqrt(self.positive_sigmas[j]) * np.exp(
+                -0.5 / self.positive_sigmas[j] * (x[:, j] - self.positive_mus[j])**2)
+            posi_pred *= prob
+        for j in range(x.shape[1]):
+            prob = 1 / np.sqrt(self.negative_sigmas[j]) * np.exp(
+                -0.5 / self.negative_sigmas[j] * (x[:, j] - self.negative_mus[j])**2)
+            nega_pred *= prob
+
+        posi_pred = self.sigmoid(posi_pred * self.phi)
+        nega_pred = self.sigmoid(nega_pred * (1 - self.phi))
+        y_hat = np.cast["int32"](posi_pred >= nega_pred)
+        acc = np.sum(y_hat == y) / x.shape[0]
+        return acc
+
+    def get_params(self):
+        return self.positive_sigmas, self.positive_mus, self.negative_sigmas, self.negative_mus    
