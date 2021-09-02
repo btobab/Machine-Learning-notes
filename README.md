@@ -13,19 +13,19 @@
 
 -|en-notebooks:English version notes
 --|linear-regression
---|perceptron
---|lda
---|logistic-regression
---|gda
---|Naive_Bayes_classify
+--|linear_classification_perceptron
+--|linear_classification_lda
+--|linear_classification_logistic-regression
+--|linear_classification_gda
+--|linear_classification_Naive_Bayes_classify
 
 -|cn-notebooks:中文版ML笔记集合
 --|线性回归篇
---|感知机篇
---|线性判别分析篇
---|逻辑回归篇
---|高斯判别分析篇
---|朴素贝叶斯篇
+--|线性分类_感知机篇
+--|线性分类_线性判别分析篇
+--|线性分类_逻辑回归篇
+--|线性分类_高斯判别分析篇
+--|线性分类_朴素贝叶斯篇
 
 -README.md
 ```
