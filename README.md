@@ -19,7 +19,7 @@
 --|gda
 --|Naive_Bayes_classify
 
--|cn-notebooks:中文版ML笔记
+-|cn-notebooks:中文版ML笔记集合
 --|线性回归篇
 --|感知机篇
 --|线性判别分析篇
