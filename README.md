@@ -10,6 +10,8 @@
 ---|Logistic_regression
 ---|GDA
 ---|Naive_Bayes_classifier
+--|decompose_models.py(分解算法集合)
+---|PCA
 
 -|en-notebooks:English version notes
 --|linear-regression
@@ -18,6 +20,7 @@
 --|linear_classification_logistic-regression
 --|linear_classification_gda
 --|linear_classification_Naive_Bayes_classify
+--|dimension_reductioin_principal_component_analysis
 
 -|cn-notebooks:中文版ML笔记集合
 --|线性回归篇
@@ -26,6 +29,7 @@
 --|线性分类_逻辑回归篇
 --|线性分类_高斯判别分析篇
 --|线性分类_朴素贝叶斯篇
+--|降维_主成分分析
 
 -README.md
 ```
