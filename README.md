@@ -14,15 +14,18 @@
 ---|PCA
 
 -|en-notebooks:English version notes
+--|fundamentals-of-math_gaussian-distribution_expectation&variance
 --|linear-regression
 --|linear_classification_perceptron
 --|linear_classification_lda
 --|linear_classification_logistic-regression
 --|linear_classification_gda
 --|linear_classification_Naive_Bayes_classify
---|dimension_reductioin_principal_component_analysis
+--|dimension_reduction_principal_component_analysis
+--|dimension_reduction_Principal_coordinate_analysis
 
 -|cn-notebooks:中文版ML笔记集合
+--|数学基础篇
 --|线性回归篇
 --|线性分类_感知机篇
 --|线性分类_线性判别分析篇
@@ -30,6 +33,7 @@
 --|线性分类_高斯判别分析篇
 --|线性分类_朴素贝叶斯篇
 --|降维_主成分分析
+--|降维_主坐标分析
 
 -README.md
 ```
