@@ -15,6 +15,7 @@
 
 -|en-notebooks:English version notes
 --|fundamentals-of-math_gaussian-distribution_expectation&variance
+--|fundamentals-of-math_gaussian-distribution_perspective-of-probability
 --|linear-regression
 --|linear_classification_perceptron
 --|linear_classification_lda
@@ -25,7 +26,8 @@
 --|dimension_reduction_Principal_coordinate_analysis
 
 -|cn-notebooks:中文版ML笔记集合
---|数学基础篇
+--|数学基础_高斯分布_期望方差篇
+--|数学基础_高斯分布_概率视角篇
 --|线性回归篇
 --|线性分类_感知机篇
 --|线性分类_线性判别分析篇
