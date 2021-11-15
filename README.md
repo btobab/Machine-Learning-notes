@@ -16,6 +16,7 @@
 -|en-notebooks:English version notes
 --|fundamentals-of-math_gaussian-distribution_expectation&variance
 --|fundamentals-of-math_gaussian-distribution_perspective-of-probability
+--|fundamentals-of-math_gaussian-distribution_marginal-probability&conditonal-probability
 --|linear-regression
 --|linear_classification_perceptron
 --|linear_classification_lda
@@ -28,6 +29,7 @@
 -|cn-notebooks:中文版ML笔记集合
 --|数学基础_高斯分布_期望方差篇
 --|数学基础_高斯分布_概率视角篇
+--|数学基础_高斯分布_边缘概率&条件概率
 --|线性回归篇
 --|线性分类_感知机篇
 --|线性分类_线性判别分析篇
