@@ -26,6 +26,7 @@
 --|linear_classification_Naive_Bayes_classify
 --|dimension_reduction_principal_component_analysis
 --|dimension_reduction_Principal_coordinate_analysis
+--|dimension_reduction_Probability_Principal_componant_analysis
 
 -|cn-notebooks:中文版ML笔记集合
 --|数学基础_高斯分布_期望方差篇
@@ -40,6 +41,7 @@
 --|线性分类_朴素贝叶斯篇
 --|降维_主成分分析
 --|降维_主坐标分析
+--|降维_概率视角的主成分分析
 
 -README.md
 ```
