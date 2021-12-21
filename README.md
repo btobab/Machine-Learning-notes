@@ -24,7 +24,8 @@
 │  ├──linear_classification_gda
 │  ├──linear_classification_Naive_Bayes_classify
 │  ├──dimension_reduction_principal_component_analysis
-│  ├──dimension_reduction_Principal_coordinate_analysis         │  ├──dimension_reduction_Probability_Principal-componant-analysis
+│  ├──dimension_reduction_Principal_coordinate_analysis
+│  ├──dimension_reduction_Probability_Principal-componant-analysis
 ├──CN-TeX_files:各章节的中文版TeX格式的ML笔记
 │  ├──数学基础_高斯分布_期望方差篇
 │  ├──数学基础_高斯分布_概率视角篇
