@@ -1,0 +1,160 @@
+\documentclass{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\section{Marginal distribution and Conditional distribution}
+\subsection{Abstract}
+In this section, we study the marginal probability and conditional probability of multivariate Gaussian distribution
+\subsection{Prior Knowledge}
+In the previous chapter, we derived the probability density function of multivariate Gaussian distribution:
+$$
+x \backsim N(\mu, \Sigma) = \frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma|^\frac{1}{2}}\exp(-\frac{1}{2}(x-\mu)^T \Sigma^{-1}(x-\mu))
+$$
+Now let's split the random variable $x$ into two parts:
+$$
+x \in \mathcal{R}^p \quad x_a \in \mathcal{R}^m \quad x_b \in \mathcal{R}^n \quad m+n=p \quad 
+$$
+$$
+x = 
+\left (
+\begin{matrix}
+x_a \\
+x_b \\
+\end{matrix}
+\right )
+\quad 
+\mu = 
+\left (
+\begin{matrix}
+\mu_a \\
+\mu_b \\
+\end{matrix}
+\right ) \quad
+\Sigma=
+\left (
+\begin{matrix}
+\Sigma_{aa} & \Sigma_{ab}\\
+\Sigma_{ba} & \Sigma_{bb}\\
+\end{matrix}
+\right )
+$$
+\subsection{Theorem}
+$$
+X \sim N(\mu, \Sigma) \quad Y=AX+B  \Longrightarrow Y \sim N(A\mu+B, A \Sigma A^T)
+$$
+\subsection{Derive Marginal Distribution}
+$$
+x_a = \left (\begin{matrix}I & 0\end{matrix}\right )\left (\begin{matrix}x_a \\x_b\\\end{matrix}\right ) + 0
+$$
+$$
+E[x_a] = \left (\begin{matrix}I & 0\end{matrix}\right )\left (\begin{matrix}\mu_a \\\mu_b \\\end{matrix}\right ) = \mu_a
+$$
+$$
+\begin{aligned}Var[x_a] &= \left (\begin{matrix}I & 0\end{matrix}\right )\left (\begin{matrix}\Sigma_{aa} & \Sigma_{ab} \\\Sigma_{ba} & \Sigma_{bb} \\\end{matrix}\right )\left (\begin{matrix}I \\0\end{matrix}\right ) \\&= \left (\begin{matrix}\Sigma_{aa} & \Sigma_{ab} \end{matrix}\right )\left (\begin{matrix}I \\0\end{matrix}\right )\\&=\Sigma_{aa}\end{aligned}
+$$
+$$
+\therefore x_a \sim N(\mu_a, \Sigma_{aa})
+$$
+\subsection{Derive conditional Distribution}
+Let's set:
+$$
+\begin{cases}
+x_{b.a}=x_b - \Sigma_{ba} \Sigma_{aa}^{-1} x_a \\
+\mu_{b.a} = \mu_b - \Sigma_{b.a} \Sigma_{aa}^{-1} \mu_a \\
+\Sigma_{bb.a}=\Sigma_{bb} - \Sigma_{ba} \Sigma_{aa}^{-1} \Sigma_{ab}
+\end{cases}
+$$
+$$
+\begin{aligned}
+x_{b.a} &= x_b - \Sigma_{ba} \Sigma_{bb}^{-1} x_a \\
+&=
+\left (
+\begin{matrix}
+- \Sigma_{ba} \Sigma_{bb}^{-1} & I\\
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+x_a \\
+x_b \\
+\end{matrix}
+\right ) + 0
+\end{aligned}
+$$
+$$
+\begin{aligned}
+E[x_{b.a}]
+&=
+\left (
+\begin{matrix}
+-\Sigma_{ba} \Sigma_{aa}^{-1} & I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+\mu_a \\
+\mu_b \\
+\end{matrix}
+\right )\\
+&=\mu_b - \Sigma_{ba} \Sigma_{aa}^{-1} \mu_a\\
+&=\mu_{b.a}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+Var[x_{b.a}]
+&= \left ( \begin{matrix}
+-\Sigma_{ba} \Sigma_{aa}^{-1} & I
+\end{matrix} \right )
+\left ( \begin{matrix}
+\Sigma_{aa} & \Sigma_{ab} \\
+\Sigma_{ba} & \Sigma_{bb} \\
+\end{matrix} \right )
+\left ( \begin{matrix}
+-\Sigma_{aa}^{-1} \Sigma_{ba}^T \\
+I
+\end{matrix} \right ) \\
+&=\left ( \begin{matrix}
+0 & \Sigma_{bb} - \Sigma_{ba} \Sigma_{aa}^{-1} \Sigma_{ab} \\
+\end{matrix} \right ) 
+\left ( \begin{matrix}
+-\Sigma_{aa}^{-1} \Sigma_{ba}^T \\
+I
+\end{matrix} \right ) \\
+&=\Sigma_{bb} - \Sigma_{ba} \Sigma_{aa}^{-1} \Sigma_{ab}\\
+&=\Sigma_{bb.a}
+\end{aligned}
+$$
+$$
+\therefore x_{b.a} \sim N(\mu_{b.a}, \Sigma_{bb.a})
+$$
+$$
+\begin{cases}
+\mu_{b.a} = \mu_b - \Sigma_{ba} \Sigma_{aa}^{-1} \mu_a \\
+\Sigma_{bb.a}=\Sigma_{bb} - \Sigma_{ba} \Sigma_{aa}^{-1} \Sigma_{ab}
+\end{cases}
+$$
+We slightly modify the formula:
+
+$$
+\begin{aligned}
+x_{b.a}
+&=x_b - \Sigma_{ba} \Sigma_{aa}^{-1} x_a\\
+x_b | x_a&=x_{b.a} + \Sigma_{ba} \Sigma_{aa}^{-1} x_a\\
+&=I x_{b.a} + C\\
+\end{aligned}
+$$
+Here, all parts of the covariance matrix  $\Sigma_{ba} \ \Sigma_{aa}$  can be calculated, so it can be regarded as a constant.\\\\
+And what we're asking for here is $x_b | x_a$, so $x_a$ is also known, so the second term of the above formula can be regarded as a constant.\\\\
+therefore:
+$$
+E[x_b|x_a]=I E[x_{b.a}] + C = \mu_{b.a} + \Sigma_{ba} \Sigma_{aa}^{-1} x_a
+$$
+$$
+Var[x_b|x_a]=IVar[x_{b.a}]I^T=\Sigma_{bb.a}
+$$
+then we get the conditional probability of multivariate gaussian distribution:
+$$
+x_b|x_a \sim N(\mu_{b.a} + \Sigma_{ba} \Sigma_{aa}^{-1} x_a, \Sigma_{bb.a})
+$$
+\end{document}

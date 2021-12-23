@@ -1,0 +1,186 @@
+\documentclass{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\section{Joint Distribution}
+\subsection{Abstract}
+In this section, we study Gaussian joint distribution.
+\subsection{Given}
+$$
+x \backsim N(x|\mu, \Lambda^{-1})
+$$
+$$
+y|x \backsim N(y|Ax+b, L^{-1})
+$$
+\subsubsection{Inference}
+$$
+y = Ax+b+\epsilon, \quad \epsilon \backsim N(0, L^{-1}), \quad x \perp \epsilon
+$$
+\subsection{To solve}
+$$
+\begin{cases}
+p(y)\\
+\\
+p(x|y)
+\end{cases}
+$$
+\subsection{Derivation}
+\subsubsection{Derive $p(y)$}
+
+$$
+E[y] = A E[x] + b + E[\epsilon]=A \mu + b
+$$
+$$
+Var[y] = A \Lambda^{-1} A^T
+$$
+$$
+\therefore y \backsim N(A\mu +b, A\Lambda^{-1} A^T)
+$$
+\subsubsection{Derive $p(x|y)$}
+\paragraph{Construct dist $z$\\}
+Here we construct a distribution:
+$$
+z = 
+\left (
+\begin{matrix}
+x\\
+y\\
+\end{matrix}
+\right )
+\backsim N(
+\left [
+\begin{matrix}
+\mu\\
+A\mu+b\\
+\end{matrix}
+\right ],
+\left [
+\begin{matrix}
+\Lambda^{-1}&\Delta\\
+\Delta&A\Lambda^{-1} A^T\\
+\end{matrix}
+\right ]
+)
+$$
+$$
+\begin{aligned}
+\Delta
+&=cov(x,y)\\
+&=E[(x-E[x])(y-E[y])^T]\\
+&=E[(x-\mu)(y-A\mu - b)^T]\\
+&=E[(x-\mu)(Ax+b+ \epsilon -A\mu -b)^T)]\\
+&=E[(x-\mu)(Ax-A\mu + \epsilon)^T]\\
+&=E[(x-\mu)(x-\mu)^T A^T + (x-\mu)\epsilon^T]\\
+&=E[(x-\mu)(x-\mu)^T]A^T + E[(x-\mu)\epsilon^T] \\
+\because &x \perp \epsilon\\
+\therefore &=E[(x-\mu)(x-\mu)^T]A^T\\
+&=\Lambda^{-1}A^T
+\end{aligned}
+$$
+$$
+\therefore z=
+\left ( \begin{matrix}
+x\\y
+\end{matrix} \right )
+\backsim N(
+\left [
+\begin{matrix}
+\mu\\
+A\mu+b\\
+\end{matrix}
+\right ],
+\left [
+\begin{matrix}
+\Lambda^{-1}&\Lambda^{-1}A^T\\
+\Lambda^{-1}A^T&A\Lambda^{-1} A^T\\
+\end{matrix}
+\right ]
+)
+$$
+\paragraph{Construct dist $x.y$\\}
+let's set 
+$$
+\begin{aligned}
+x.y 
+&= x - \Sigma_{xy} \Sigma_{yy}^{-1}y\\
+&= x - (\Lambda^{-1} A^T)(A \Lambda^{-1}A^T)^{-1}y\\
+&= x - A^{-1}y\\
+&= 
+\left ( \begin{matrix}
+I& -A^{-1}
+\end{matrix} \right )
+\left ( \begin{matrix}
+x\\
+y
+\end{matrix} \right )
+\end{aligned}
+$$
+$$
+\begin{aligned}
+E[x.y] 
+&= E[x] - A^{-1} E[y]\\
+&= \mu - A^{-1}(A\mu+b)\\
+&= -A^{-1}b
+\end{aligned}
+$$
+$$
+\begin{aligned}
+Var[x.y]
+&= 
+\left ( \begin{matrix}
+I& -A^{-1}
+\end{matrix} \right )
+Var[z]
+\left ( \begin{matrix}
+I\\
+-(A^{-1})^T\\
+\end{matrix} \right )\\
+&= 
+\left ( \begin{matrix}
+I& -A^{-1}
+\end{matrix} \right )
+\left (
+\begin{matrix}
+\Lambda^{-1}&\Lambda^{-1}A^T\\
+\Lambda^{-1}A^T&A\Lambda^{-1} A^T\\
+\end{matrix}
+\right )
+\left ( \begin{matrix}
+I\\
+-(A^{-1})^T\\
+\end{matrix} \right )\\
+&=
+\left ( \begin{matrix}
+\Lambda^{-1}-A^{-1} \Lambda^{-1}A^T & 0
+\end{matrix} \right )
+\left ( \begin{matrix}
+I\\
+-(A^{-1})^T\\
+\end{matrix} \right )\\
+&=\Lambda^{-1}-A^{-1} \Lambda^{-1}A^T
+\end{aligned}
+$$
+$$
+\therefore x.y \backsim N(-A^{-1}b, \Lambda^{-1}-A^{-1} \Lambda^{-1}A^T)
+$$
+\paragraph{Construct $x|y$\\}
+we got
+$$
+x|y = x.y + A^{-1}y
+$$
+here, we can see $A^{-1}y$ as constant $C$.\\\\
+then:
+$$
+x|y = x.y + C
+$$
+$$
+E[x|y] = A^{-1}y - A^{-1}b
+$$
+$$
+Var[x|y]= Var[x.y]
+$$
+$$
+\therefore x|y \backsim N(A^{-1}y - A^{-1}b, \Lambda^{-1}-A^{-1} \Lambda^{-1}A^T)
+$$
+Now, according to an edge distribution and conditional distribution, we construct a joint distribution to obtain another edge distribution and conditional distribution.
+\end{document}

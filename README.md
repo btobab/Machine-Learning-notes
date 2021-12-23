@@ -40,7 +40,7 @@
 │  ├──降维_主成分分析
 │  ├──降维_主坐标分析
 │  ├──降维_概率视角的主成分分析
-├──Machine-Learning-Notes.tex: an notes set consisted of  chapters
+├──Machine-Learning-Notes.tex: an notes set composed by  chapters
 ├──Machine-Learning-Notes.pdf: compiled from tex file with the same file name
 ├──机器学习笔记.tex: 由各章节组成的笔记集合
 ├──机器学习笔记.pdf: 由同名tex文件编译得到

@@ -12,19 +12,67 @@
 \title{机器学习笔记}
 \author{李宇奇}
 \date{December 2021}
+\hypersetup{colorlinks=true,linkcolor=black}
+
 \begin{document}
 \maketitle
 \tableofcontents
-\include{CN-TeX_files/01_数学基础_高斯分布_期望方差}
-\include{CN-TeX_files/02_数学基础_高斯分布_概率视角}
-\include{CN-TeX_files/03_数学基础_高斯分布_边缘概率&条件概率}
-\include{CN-TeX_files/04_数学基础_高斯分布_联合分布}
-\include{CN-TeX_files/05_线性回归}
-\include{CN-TeX_files/06_线性分类_感知机}
-\include{CN-TeX_files/07_线性分类_线性判别分析}
-\include{CN-TeX_files/08_线性分类_逻辑回归}
-\include{CN-TeX_files/09_线性分类_高斯判别分析}
-\include{CN-TeX_files/10_线性分类_朴素贝叶斯分类器}
-\include{CN-TeX_files/11_降维_主成分分析}
-\include{CN-TeX_files/12_降维_主坐标分析}
+\chapter{数学基础}
+在本章，我们将通过学习高斯分布来巩固我们的数学基础\\\\
+我们将从四个不同的视角来了解高斯分布:
+\begin{itemize}
+	\item[*] 期望与方差视角
+	\item[*] 概率视角
+	\item[*] 边缘分布和条件分布视角
+	\item[*] 联合分布视角
+\end{itemize}
+\include{CN-TeX_files/数学基础/01_数学基础_高斯分布_期望方差}
+\include{CN-TeX_files/数学基础/02_数学基础_高斯分布_概率视角}
+\include{CN-TeX_files/数学基础/03_数学基础_高斯分布_边缘概率&条件概率}
+\include{CN-TeX_files/数学基础/04_数学基础_高斯分布_联合分布}
+
+\chapter{线性回归}
+在本章，我们将从多个视角学习带或不带正则项的线性回归:
+\begin{itemize}
+	\item[] 由MLE推导得出的不带正则项的线性回归
+	\begin{itemize}
+	\item 矩阵视角
+	\item 几何视角
+	\item 概率视角
+	\end{itemize}
+	
+	\item[] 由MAP推导得出的带正则项的线性回归
+	\begin{itemize}
+	\item 矩阵视角
+	\item 概率视角
+	\end{itemize}
+\end{itemize}
+\include{CN-TeX_files/线性回归/05_线性回归}
+
+\chapter{线性分类}
+在本章，我们将学习多个关于线性分类的算法:
+\begin{itemize}
+	\item 硬输出 (直接输出样本的类别):
+	\begin{itemize}
+		\item 感知机
+		\item 线性判别分析
+	\end{itemize}
+	\item 软输出(输出样本属于某类的概率):
+	\begin{itemize}
+	\item 高斯判别分析
+	\item 逻辑回归
+	\item 朴素贝叶斯分类
+	\end{itemize}
+\end{itemize}
+\include{CN-TeX_files/线性分类/06_线性分类_感知机}
+\include{CN-TeX_files/线性分类/07_线性分类_线性判别分析}
+\include{CN-TeX_files/线性分类/08_线性分类_逻辑回归}
+\include{CN-TeX_files/线性分类/09_线性分类_高斯判别分析}
+\include{CN-TeX_files/线性分类/10_线性分类_朴素贝叶斯分类器}
+
+\chapter{降维}
+在本章，我们将学习关于降维的算法，我们的重点是主成分分析，主坐标分析以及概率视角的主成分分析。
+\include{CN-TeX_files/降维/11_降维_主成分分析}
+\include{CN-TeX_files/降维/12_降维_主坐标分析}
+\include{CN-TeX_files/降维/13_降维_概率视角的主成分分析}
 \end{document}

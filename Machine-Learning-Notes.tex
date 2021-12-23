@@ -10,6 +10,7 @@
 \title{Machine-Learning-Notes}
 \author{btobab}
 \date{December 2021}
+\hypersetup{colorlinks=true,linkcolor=black}
 
 \begin{document}
 \maketitle
@@ -17,16 +18,63 @@
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
-\include{EN-TeX_files/01_fundamentals-of-math_gaussian-distribution_expectation&variance}
-\include{EN-TeX_files/02_fundamentals-of-math_gaussian-distribution_perspective-of-probability}
-\include{EN-TeX_files/03_fundamentals-of-math_gaussian-distribution_marginal-probability&conditonal-probability}
-\include{EN-TeX_files/04_fundamentals-of-math_gaussian-distribution-joint_distribution}
-\include{EN-TeX_files/05_linear_regression}
-\include{EN-TeX_files/06_linear_classification_perceptron}
-\include{EN-TeX_files/07_linear_classification_lda}
-\include{EN-TeX_files/08_linear_classification_logistic_regression}
-\include{EN-TeX_files/09_linear_classification_gda}
-\include{EN-TeX_files/10_linear_classification_naive_bayes_classify}
-\include{EN-TeX_files/11_dimension_reduction_PCA}
-\include{EN-TeX_files/12_dimension_reduction_PCoA}
+
+\chapter{Intro-Math}
+In the chapter, we'll lay our math foundation via learning Gaussian distribution.\\\\
+We'll grasp Gaussian distribution from four different perspectives:
+\begin{itemize}
+	\item[*] the perspective of Expectation and Variance
+	\item[*] the perspective of probability
+	\item[*] the perspective of marginal or conditional distribution
+	\item[*] the perspective of joint distribution
+\end{itemize}
+\include{EN-TeX_files/Intro_Math/01_fundamentals-of-math_gaussian-distribution_expectation&variance}
+\include{EN-TeX_files/Intro_Math/02_fundamentals-of-math_gaussian-distribution_perspective-of-probability}
+\include{EN-TeX_files/Intro_Math/03_fundamentals-of-math_gaussian-distribution_marginal-probability&conditonal-probability}
+\include{EN-TeX_files/Intro_Math/04_fundamentals-of-math_gaussian-distribution-joint_distribution}
+
+\chapter{LinearRegression}
+In this chapter, we'll learn Linear Regression with or without regularization from several perspectives:
+\begin{itemize}
+	\item[] LinearRegression without regularization which is derived via MLE
+	\begin{itemize}
+	\item the perspective of matrix
+	\item the perspective of geometry
+	\item the perspective of probability
+	\end{itemize}
+	
+	\item[] LinearRegression with regularization which is derived via MAP
+	\begin{itemize}
+	\item the perspective of matrix
+	\item the perspective of probability
+	\end{itemize}
+\end{itemize}
+\include{EN-TeX_files/LinearRegression/05_linear_regression}
+
+\chapter{LinearClassification}
+In this chapter, we'll learn several algorithms about LinearClassification:
+\begin{itemize}
+	\item hard output (directly output the class of the samples):
+	\begin{itemize}
+		\item perceptron
+		\item LDA(linear discriminant analysis)
+	\end{itemize}
+	\item soft output(output the probability that samples belong to some class):
+	\begin{itemize}
+	\item gaussian discriminant analysis
+	\item logistic regression
+	\item Naive Bayes Classificatioin
+	\end{itemize}
+\end{itemize}
+\include{EN-TeX_files/LinearClassification/06_linear_classification_perceptron}
+\include{EN-TeX_files/LinearClassification/07_linear_classification_lda}
+\include{EN-TeX_files/LinearClassification/08_linear_classification_logistic_regression}
+\include{EN-TeX_files/LinearClassification/09_linear_classification_gda}
+\include{EN-TeX_files/LinearClassification/10_linear_classification_naive_bayes_classify}
+
+\chapter{DimensionReduction}
+In this chapter, we'll learn several algorithms about DimensionReduction and our key point is PCA and its variant PCoA and p-PCA.
+\include{EN-TeX_files/DimensionReduction/11_dimension_reduction_PCA}
+\include{EN-TeX_files/DimensionReduction/12_dimension_reduction_PCoA}
+\include{EN-TeX_files/DimensionReduction/13_dimension_reduction_pPCA}
 \end{document}}

@@ -1,0 +1,369 @@
+\documentclass{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\begin{document}
+\section{P-PCA}
+In this section, we'll learn PCA from perspective of probability which is called P-PCA.
+
+\subsection{Given}
+$$
+\begin{aligned}
+x \in R^p, \ z \in R^q, \ q < p\\
+\begin{cases}
+z \backsim N(0_q, I_q)\\
+x = wz + \mu + \epsilon\\
+\epsilon \backsim N(0_p, \sigma^2 I_p)
+\end{cases}
+\end{aligned}
+$$
+\subsection{To solve}
+$$
+x|z \quad x \quad z|x
+$$
+\subsection{Derivation}
+\subsubsection{derive $x$}
+\begin{equation}
+\begin{aligned}
+E[x]
+&= w E[z] + E[\mu] + E[\epsilon]\\
+&=\mu
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+Var[x] &= w Var[z] w^T + Var[\mu] + Var[\epsilon]\\
+&=ww^T + 0 + \sigma^2 I_p\\
+&=ww^T + \sigma^2 I_p
+\end{aligned}
+\end{equation}
+$$
+\therefore x \backsim N(\mu, ww^T + \sigma^2 I_p)
+$$
+\subsubsection{derive $x|z$}
+\paragraph{construct dist $t$\\}
+$$
+t = 
+\left (
+\begin{matrix}
+x\\
+z
+\end{matrix}
+\right )
+$$
+\begin{equation}
+\begin{aligned}
+E[t] &= 
+\left (
+\begin{matrix}
+E[x]\\
+E[z]
+\end{matrix}
+\right )\\
+&=
+\left (
+\begin{matrix}
+\mu l_p\\
+0_q
+\end{matrix}
+\right )
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+cov(x,z)
+&= E[(x - E[x])(z - E[z])^T]\\
+&= E[(x - \mu)z^T]\\
+&= E[(wz + \epsilon)z^T]\\
+&= E[wzz^T] + E[\epsilon z^T]\\
+&= w E[(z - E[z])(z - E[z])^T] + E[\epsilon z^T]\\
+&= w Var[z] + 0\\
+&= w I_q\\
+&= w
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\therefore 
+Var[t] &= 
+\left (
+\begin{matrix}
+ww^T + \sigma^2 I_p & w\\
+w^T & I_q
+\end{matrix}
+\right )
+\end{aligned}
+\end{equation}
+$$
+\therefore 
+t \backsim 
+N(
+\left [
+\begin{matrix}
+\mu l_p\\
+0_q
+\end{matrix}
+\right ],
+\left [
+\begin{matrix}
+ww^T + \sigma^2 I_p & w\\
+w^T & I_q
+\end{matrix}
+\right ]
+)
+$$
+\paragraph{construct $x.z$\\}
+$$set\ x.z = x - \Sigma_{xz} \Sigma_{zz}^{-1}z$$
+\begin{equation}
+\begin{aligned}
+\therefore x.z &= x - wz\\
+&=
+\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+x \\
+z
+\end{matrix}
+\right )\\
+&=\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right )
+t
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\therefore 
+E[x.z]&=
+\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right ) E[t]\\
+&= 
+\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+\mu l_p\\
+0_q
+\end{matrix}
+\right )\\
+&=\mu l_p
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+Var[x.z] 
+&= 
+\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right )
+Var[t]
+ \left (
+\begin{matrix}
+I_p \\ -w^T
+\end{matrix}
+\right )\\
+&= 
+\left (
+\begin{matrix}
+I_p & -w
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+ww^T + \sigma^2 I_p & w\\
+w^T & I_q
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+I_p \\ -w^T
+\end{matrix}
+\right )\\
+&=
+\left (
+\begin{matrix}
+\sigma^2 I_p & 0
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+I_p \\ -w^T
+\end{matrix}
+\right )\\
+&=\sigma^2 I_p
+\end{aligned}
+\end{equation}
+\\
+\begin{equation}
+\therefore 
+x.z \backsim N(\mu l_p, \sigma^2 I_p)
+\end{equation}
+\subsubsection{derive $x|z$}
+\begin{equation}
+\begin{aligned}
+\because 
+x.z &= x - \Sigma_{xz} \Sigma_{zz}^{-1} z\\
+\therefore 
+x|z &= x.z + \Sigma_{xz} \Sigma_{zz}^{-1}z\\
+&= x.z + wz
+\end{aligned}
+\end{equation}
+Here $z$ is known, so we can treat $wz$ as constant.
+\begin{equation}
+\begin{aligned}
+E[x|z] &= E[x.z] + wz\\
+&= \mu l_p + wz
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+Var[x|z] &= Var[x.z] + 0\\
+&= \sigma^2 I_p
+\end{aligned}
+\end{equation}\\
+\begin{equation}
+\therefore
+x|z \backsim N(\mu l_p + wz, \sigma^2 I_p)
+\end{equation}
+
+\subsubsection{derive $z|x$}
+\begin{equation}
+\begin{aligned}
+set\ z.x &= z - \Sigma_{zx} \Sigma_{xx}^{-1} x\\
+&= z - w^T \Sigma_{xx}^{-1} x\\
+set\ \Sigma &= \Sigma_{xx} \\
+\therefore 
+z.x &= z - w^T \Sigma^{-1}x
+\end{aligned}
+\end{equation}
+let's slightly deform the formula above:
+\begin{equation}
+\begin{aligned}
+z.x &= z - w^T \Sigma^{-1}x\\
+&=
+\left (
+\begin{matrix}
+-w^T \Sigma^{-1} & I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+x\\z
+\end{matrix}
+\right )\\
+&= \left (
+\begin{matrix}
+-w^T \Sigma^{-1} & I
+\end{matrix}
+\right )
+t
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+E[z.x] &=
+\left (
+\begin{matrix}
+-w^T \Sigma^{-1} & I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+\mu l_p \\ 0_q
+\end{matrix}
+\right )\\
+&= -\mu w^T \Sigma^{-1}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+Var[z.x] &=
+\left (
+\begin{matrix}
+-w^T \Sigma^{-1} & I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+\Sigma & w\\
+w^T & I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+-(\Sigma^{-1})^T w \\ I
+\end{matrix}
+\right )\\
+&= 
+\left (
+\begin{matrix}
+0 & -w^T \Sigma^{-1}w + I
+\end{matrix}
+\right )
+\left (
+\begin{matrix}
+- \Sigma^{-1} w\\ I
+\end{matrix}
+\right )\\
+&= -w^T \Sigma^{-1}w + I
+\end{aligned}
+\end{equation}\\
+\begin{equation}
+\therefore z.x \backsim N(-\mu w^T \Sigma^{-1}, -w^T \Sigma^{-1} w + I)
+\end{equation}\\
+\begin{equation}
+\begin{aligned}
+\because 
+z.x &= z - w^T \Sigma^{-1} x\\
+\therefore 
+z|x &= z.x + w^T \Sigma^{-1} x\\
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+E[z|x] 
+&= E[z.x] + w^T \Sigma^{-1} x\\
+&= -\mu w^T \Sigma^{-1} + w^T \Sigma^{-1} x\\
+&= w^T \Sigma^{-1} (x - \mu l_p)\\
+&= w^T (ww^T + \sigma^2 I)^{-1}(x - \mu l_p)
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+Var[z|x] 
+&= Var[z.x] + 0\\
+&= -w^T \Sigma^{-1} w + I\\
+&= -w^T (ww^T + \sigma^2 I)^{-1} w + I\\
+\end{aligned}
+\end{equation}\\
+\begin{equation}
+\therefore
+z|x \backsim N(w^T (ww^T + \sigma^2 I)^{-1}(x - \mu l_p), -w^T (ww^T + \sigma^2 I)^{-1} w + I)
+\end{equation}
+\subsection{Conclusion}
+the parameters we are to seek are:
+$$
+\{ w, \ \sigma , \ \mu \}
+$$
+We can obtain them by maximizing $p(x|z)$ via EM algorithm which means:
+\begin{itemize}
+	\item we calculate $p(x|z)$ in the process of training.
+	\item we calculate $p(z|x)$ in the process of inference.
+\end{itemize}
+\end{document}
